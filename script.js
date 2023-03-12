@@ -8,7 +8,7 @@ class Calculator {
   clear() {
     this.current = '';
     this.prev = '';
-    this.operation = undefined;
+    this.operation = '';
   }
 
   delete() {
@@ -17,21 +17,16 @@ class Calculator {
 
   appendNumber(number) {
     if (number === '.' && this.current.includes('.')) return;
-    this.current = this.current.toString() + number.toString();
+    this.current = this.current + number;
   }
 
   chooseOperation(operation) {
     if (this.current === '') return;
-    if (this.prev !== '') {
-      this.compute();
-    }
     this.operation = operation;
-    this.prev = this.current;
-    this.current = '';
   }
   compute() {
     let computation;
-    const p = parseFloat(this.prev);
+    const p = parseFloat(this.current);
     const c = parseFloat(this.current);
     if (isNaN(p) || isNaN(c)) return;
     switch (this.operation) {
@@ -50,16 +45,14 @@ class Calculator {
       default:
         return;
     }
-    this.current = computation;
-    this.operation = undefined;
-    this.prev = '';
+    this.prev = computation;
+    this.operation = '';
+    this.current = '';
   }
 
   updateDisplay() {
-    this.currentNumber.innerText = this.current;
-    if (this.operation != null) {
-      this.prevNumber.innerText = `${this.prev} ${this.operation}`;
-    }
+    this.currentNumber.innerText = `${this.current} ${this.operation}`;
+    this.prevNumber.innerText = `${this.prev}`;
   }
 }
 
