@@ -9,28 +9,27 @@
   </head>
   <body>
     <div class="container">
-      <div class="output">
-        <div data-prev-number class="prev_number"></div>
-        <div data-current-number class="current_number"></div>
-      </div>
-      <button data-all-clear class="span_two">AC</button>
-      <button data-delete>DEL</button>
-      <button data-operation>/</button>
-      <button data-number>1</button>
-      <button data-number>2</button>
-      <button data-number>3</button>
-      <button data-operation>-</button>
-      <button data-number>4</button>
-      <button data-number>5</button>
-      <button data-number>6</button>
-      <button data-operation>+</button>
-      <button data-number>7</button>
-      <button data-number>8</button>
-      <button data-number>9</button>
-      <button data-operation>*</button>
-      <button data-number>.</button>
-      <button data-number>0</button>
-      <button data-equals class="span_two">=</button>
+      <form name="form1" class="output">
+        <input data-current-number class="current_number" readonly />
+      </form>
+      <input onclick="allClear()" type="button" class="span_two" value="AC" />
+      <input onclick="Delete()" type="button" value="DEL" />
+      <input onclick="chooseOperation('/')" type="button" value="/" />
+      <input onclick="appendNumber(1)" type="button" value="1" />
+      <input onclick="appendNumber(2)" type="button" value="2" />
+      <input onclick="appendNumber(3)" type="button" value="3" />
+      <input onclick="chooseOperation('-')" type="button" value="-" />
+      <input onclick="appendNumber(4)" type="button" value="4" />
+      <input onclick="appendNumber(5)" type="button" value="5" />
+      <input onclick="appendNumber(6)" type="button" value="6" />
+      <input onclick="chooseOperation('+')" type="button" value="+" />
+      <input onclick="appendNumber(7)" type="button" value="7" />
+      <input onclick="appendNumber(8)" type="button" value="8" />
+      <input onclick="appendNumber(9)" type="button" value="9" />
+      <input onclick="chooseOperation('*')" type="button" value="*" />
+      <input onclick="appendNumber('.')" type="button" value="." />
+      <input onclick="appendNumber(0)" type="button" value="0" />
+      <input onclick="compute()" type="button" class="span_two" value="=" />
     </div>
     <script src="script.js"></script>
   </body>

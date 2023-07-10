@@ -49,5 +49,9 @@ body {
   color: rgb(154, 150, 150);
 }
 .current_number {
-  font-size: 35px;
+  font-size: 25px;
+}
+
+input[type='button'] {
+  cursor: pointer;
 }

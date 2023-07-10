@@ -1,14 +1,12 @@
+// class section
 class Calculator {
-  constructor(prevNumber, currentNumber) {
-    this.prevNumber = prevNumber;
-    this.currentNumber = currentNumber;
+  constructor() {
     this.clear();
   }
 
   clear() {
     this.current = '';
-    this.prev = '';
-    this.operation = '';
+    this.result = 0;
   }
 
   delete() {
@@ -16,81 +14,57 @@ class Calculator {
   }
 
   appendNumber(number) {
-    if (number === '.' && this.current.includes('.')) return;
-    this.current = this.current + number;
+    this.current += number;
   }
 
   chooseOperation(operation) {
-    if (this.current === '') return;
-    this.operation = operation;
+    // if (this.appendNumber(number) === '') return;
+    this.current += operation;
   }
   compute() {
-    let computation;
-    const p = parseFloat(this.current);
-    const c = parseFloat(this.current);
-    if (isNaN(p) || isNaN(c)) return;
-    switch (this.operation) {
-      case '+':
-        computation = p + c;
-        break;
-      case '-':
-        computation = p - c;
-        break;
-      case '/':
-        computation = p / c;
-        break;
-      case '*':
-        computation = p * c;
-        break;
-      default:
-        return;
+    try {
+      this.result = eval(this.current);
+    } catch (error) {
+      this.result = 'Error';
     }
-    this.prev = computation;
-    this.operation = '';
-    this.current = '';
+    this.current = this.result.toString();
   }
 
-  updateDisplay() {
-    this.currentNumber.innerText = `${this.current} ${this.operation}`;
-    this.prevNumber.innerText = `${this.prev}`;
+  getDisplay() {
+    return this.current;
   }
 }
 
-const numbersButton = document.querySelectorAll('[data-number]');
-const operationsButton = document.querySelectorAll('[data-operation]');
-const deleteButton = document.querySelector('[data-delete]');
-const allClearButtton = document.querySelector('[data-all-clear]');
-const prevNumber = document.querySelector('[data-prev-number]');
 const currentNumber = document.querySelector('[data-current-number]');
-const equalsButton = document.querySelector('[data-equals]');
 
-const calculator = new Calculator(prevNumber, currentNumber);
+const calculator = new Calculator();
 
-numbersButton.forEach((numberButton) => {
-  numberButton.addEventListener('click', () => {
-    calculator.appendNumber(numberButton.innerText);
-    calculator.updateDisplay();
-  });
-});
+// function section
 
-operationsButton.forEach((operationButton) => {
-  operationButton.addEventListener('click', () => {
-    calculator.chooseOperation(operationButton.innerText);
-    calculator.updateDisplay();
-  });
-});
+function appendNumber(number) {
+  calculator.appendNumber(number);
+  updateDisplay();
+}
 
-equalsButton.addEventListener('click', () => {
-  calculator.compute();
-  calculator.updateDisplay();
-});
+function chooseOperation(operation) {
+  calculator.chooseOperation(operation);
+  updateDisplay();
+}
 
-allClearButtton.addEventListener('click', () => {
-  calculator.clear();
-  calculator.updateDisplay();
-});
-
-deleteButton.addEventListener('click', () => {
+function Delete() {
   calculator.delete();
-  calculator.updateDisplay();
-});
+  updateDisplay();
+}
+
+function allClear() {
+  calculator.clear();
+  updateDisplay();
+}
+
+function compute() {
+  calculator.compute();
+  updateDisplay();
+}
+function updateDisplay() {
+  currentNumber.value = calculator.getDisplay();
+}
